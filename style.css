@@ -1,0 +1,156 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#app {
+  height: 100%;
+  padding: 24px;
+}
+
+.list {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.list-item {
+  cursor: pointer;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  margin: 18px;
+  background: #f3f3f3;
+  position: relative;
+  font-size: 20px;
+  color: #5d5d5d;
+  font-weight: bold;
+  padding-left: 12px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.list-item:hover {
+  box-shadow: 0 0 1px 1px #e5e5e5;
+  background: #f8f8f8;
+}
+
+.list-item i {
+  font-style: normal;
+  background: #e5e5e5;
+  height: 100%;
+  font-size: 18px;
+  color: #7c7c7c;
+  transition: all 0.5s;
+  width: 0;
+  visibility: hidden;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.list-item:hover i {
+  width: 30%;
+  visibility: visible;
+  opacity: 1;
+}
+
+.form {
+  width: 100%;
+  max-width: 760px;
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 34px;
+}
+
+.form-name {
+  background: #eaeaea;
+  position: relative;
+  font-size: 32px;
+  color: #5d5d5d;
+  font-weight: bold;
+  text-align: center;
+  border: 0;
+  margin-bottom: 24px;
+}
+
+.form-name:focus {
+  outline: 0;
+}
+
+.form-item {
+  margin-bottom: 24px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-textarea {
+  width: calc(50% - 12px);
+  min-height: 70px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px;
+  font-size: 18px;
+}
+
+.form-textarea:focus {
+  outline: 0;
+  box-shadow: 0 0 5px 2px #9ee1ff;
+  border: 1px solid #fff;
+}
+
+.form-add-item {
+  width: 100%;
+  height: 70px;
+  background: #f9f9f9;
+  margin-bottom: 32px;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.form-add-item:hover {
+  background: #ffffff;
+}
+
+.form-add-item::before {
+  content: "+";
+  font-size: 47px;
+  display: inline-flex;
+  color: #aeaeae;
+  font-weight: bold;
+}
+
+.btn {
+  font-size: 36px;
+  padding: 6px 24px;
+  background: #09c626;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #0cde2c;
+}
