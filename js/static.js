@@ -1,0 +1,20 @@
+const CONSTANTS = {
+  APP: 'app',
+  EDIT: 'edit',
+  TRAIN: 'train',
+  NATIVE: 'native',
+  LEARN: 'learn',
+  DONE: 'Done',
+  MAIN_FORM: 'mainForm',
+  LIST_HEADING_PLACEHOLDER: 'List heading',
+  CLASS_NAMES: {
+    FORM: 'form',
+    FORM_TITLE: 'form-title',
+    FORM_ITEM: 'form-item',
+    FORM_TEXTAREA: 'form-textarea',
+    BUTTON: 'btn',
+    ADD_ITEM: 'add-item',
+    LIST: 'list',
+    LIST_ITEM: 'list-item',
+  },
+}

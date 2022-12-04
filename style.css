@@ -22,6 +22,7 @@ body {
   min-height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: max-content;
 }
 
 .list-item {
@@ -38,6 +39,15 @@ body {
   padding-left: 12px;
   justify-content: space-between;
   overflow: hidden;
+}
+
+.list-item:nth-last-child(1) {
+  padding-left: 0;
+}
+
+.list-item:nth-last-child(1):hover {
+  background: none;
+  box-shadow: none;
 }
 
 .list-item:hover {
@@ -78,7 +88,7 @@ body {
   padding: 34px;
 }
 
-.form-name {
+.form-title {
   background: #eaeaea;
   position: relative;
   font-size: 32px;
@@ -89,7 +99,7 @@ body {
   margin-bottom: 24px;
 }
 
-.form-name:focus {
+.form-title:focus {
   outline: 0;
 }
 
@@ -115,11 +125,10 @@ body {
   border: 1px solid #fff;
 }
 
-.form-add-item {
+.add-item {
   width: 100%;
   height: 70px;
   background: #f9f9f9;
-  margin-bottom: 32px;
   border: 2px dashed #ccc;
   border-radius: 6px;
   display: flex;
@@ -128,16 +137,20 @@ body {
   cursor: pointer;
 }
 
-.form-add-item:hover {
+.add-item:hover {
   background: #ffffff;
 }
 
-.form-add-item::before {
+.add-item::before {
   content: "+";
   font-size: 47px;
   display: inline-flex;
   color: #aeaeae;
   font-weight: bold;
+}
+
+.form .add-item {
+  margin-bottom: 32px;
 }
 
 .btn {
