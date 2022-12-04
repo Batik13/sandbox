@@ -1,12 +1,4 @@
-// const DATA = JSON.parse(localStorage.getItem('data')) || [];
-
-DATA = [
-  {
-    h: 'List name',
-    c: [['Привет', 'hello'], ['Мир', 'World']],
-  },
-];
-
+const DATA = JSON.parse(localStorage.getItem('data')) || [];
 
 setStateApp();
 
@@ -26,51 +18,55 @@ function setStateApp(state = '', id = '', outputNode = document.getElementById(C
 
 function createForm(id, outputNode) {
   outputNode.innerHTML = '';
-  if (!id) {
-    DATA.push({
-      h: CONSTANTS.LIST_HEADING_PLACEHOLDER,
-      c: [{ n: '', l: '' }]
-    });
-    id = 0;
+  if (id) {
+    const data = DATA[id];
+    const formNode = document.createElement('form');
+    formNode.dataset.index = id;
+    formNode.className = CONSTANTS.CLASS_NAMES.FORM;
+    formNode.name = CONSTANTS.MAIN_FORM;
+    formNode.onsubmit = e => { e.preventDefault(); }
+    const inputNode = document.createElement('input');
+    inputNode.type = 'text';
+    inputNode.name = `title`;
+    inputNode.required = true;
+    inputNode.className = CONSTANTS.CLASS_NAMES.FORM_TITLE;
+    inputNode.value = data.h;
+    formNode.append(inputNode);
+    getFormItem(data.c, formNode);
+    const formAddItemNode = getAddItemNode();
+    formAddItemNode.onclick = function () {
+      getFormItem([['', '']], formNode);
+    }
+    const buttonNode = document.createElement('button');
+    buttonNode.className = CONSTANTS.CLASS_NAMES.BUTTON;
+    buttonNode.innerHTML = CONSTANTS.DONE;
+    buttonNode.onclick = function (e) {
+      addWordsToDATA.call(this);
+    }
+    formNode.append(formAddItemNode, buttonNode);
+    outputNode.append(formNode);
   }
-  const data = DATA[id];
-  const formNode = document.createElement('form');
-  formNode.dataset.index = id;
-  formNode.className = CONSTANTS.CLASS_NAMES.FORM;
-  formNode.name = CONSTANTS.MAIN_FORM;
-  formNode.onsubmit = e => { e.preventDefault(); }
-  const inputNode = document.createElement('input');
-  inputNode.type = 'text';
-  inputNode.name = `title`;
-  inputNode.required = true;
-  inputNode.className = CONSTANTS.CLASS_NAMES.FORM_TITLE;
-  inputNode.value = data.h;
-  formNode.append(inputNode);
-  data.c.forEach(element => {
+}
+
+function getFormItem(data, outputNode) {
+  data.forEach((element, index) => {
     const formItemNode = document.createElement('div');
     formItemNode.className = CONSTANTS.CLASS_NAMES.FORM_ITEM;
     Object.keys(element).forEach(key => {
       let textareaNode = document.createElement('textarea');
       textareaNode.className = CONSTANTS.CLASS_NAMES.FORM_TEXTAREA;
-      textareaNode.placeholder = key === 'n' ? CONSTANTS.NATIVE : CONSTANTS.LEARN;
+      textareaNode.placeholder = !+key ? CONSTANTS.NATIVE : CONSTANTS.LEARN;
       textareaNode.value = element[key];
       textareaNode.required = true;
       formItemNode.append(textareaNode);
     });
-    formNode.append(formItemNode);
+    const removeFormItem = document.createElement('i');
+    removeFormItem.onclick = function () {
+      this.closest(`.${CONSTANTS.CLASS_NAMES.FORM_ITEM}`).remove();
+    }
+    formItemNode.append(removeFormItem);
+    outputNode.append(formItemNode);
   });
-  const formAddItemNode = getAddItemNode();
-  formAddItemNode.onclick = function () {
-    console.log(this);
-  }
-  const buttonNode = document.createElement('button');
-  buttonNode.className = CONSTANTS.CLASS_NAMES.BUTTON;
-  buttonNode.innerHTML = CONSTANTS.DONE;
-  buttonNode.onclick = function (e) {
-    addWordsToDATA.call(this);
-  }
-  formNode.append(formAddItemNode, buttonNode);
-  outputNode.append(formNode);
 }
 
 function addWordsToDATA() {
@@ -79,23 +75,19 @@ function addWordsToDATA() {
   const textareaList = Array.from(document.querySelectorAll(`.${CONSTANTS.CLASS_NAMES.FORM} textarea`));
   const isEmptyField = [...formTitle, ...textareaList].find(el => !el.value);
   if (!isEmptyField) {
-    const content = [];
-    const textareaValuesList = Array.from(textareaList, el => el.value);
-
-    for (i = 0; i < textareaValuesList.length; i += 2) {
-      let tempArray;
-      tempArray = textareaValuesList.slice(i, i + 2);
-      content.push(tempArray)
-    }
-
     DATA[listNumber] = {
       h: formTitle[0].value,
       c: (() => {
-        return 55;
+        const content = [];
+        const textareaValuesList = Array.from(textareaList, el => el.value);
+        for (i = 0; i < textareaValuesList.length; i += 2) {
+          content.push(textareaValuesList.slice(i, i + 2))
+        }
+        return content;
       })()
     }
-
-    console.log(DATA[0].c);
+    localStorage.setItem('data', JSON.stringify(DATA));
+    setStateApp();
   }
 }
 
@@ -106,6 +98,7 @@ function getAddItemNode() {
 }
 
 function createList(outputNode) {
+  outputNode.innerHTML = '';
   const listNode = document.createElement('div');
   listNode.className = CONSTANTS.CLASS_NAMES.LIST;
   DATA.forEach((element, index) => {

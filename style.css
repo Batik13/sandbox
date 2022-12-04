@@ -108,6 +108,37 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
+}
+
+.form-item:hover i {
+  visibility: visible;
+  opacity: 1;
+}
+
+.form-item:hover {
+  box-shadow: 0 0 10px 5px #c0dcf4;
+}
+
+.form-item i {
+  position: absolute;
+  content: "x";
+  color: red;
+  left: calc(100% + 3px);
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: -23px;
+  padding: 10px;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.form-item i::before {
+  content: "x";
+  display: block;
+  font-style: normal;
 }
 
 .form-textarea {
@@ -151,6 +182,7 @@ body {
 
 .form .add-item {
   margin-bottom: 32px;
+  order: 1;
 }
 
 .btn {
@@ -162,6 +194,7 @@ body {
   color: #fff;
   cursor: pointer;
   transition: all 0.3s;
+  order: 1;
 }
 
 .btn:hover {
