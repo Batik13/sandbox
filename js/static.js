@@ -10,10 +10,10 @@ const CONSTANTS = {
   CLASS_NAMES: {
     FORM: 'form',
     FORM_TITLE: 'form-title',
-    FORM_ITEM: 'form-item',
+    TEXTAREA_GROUP: 'form-item',
     FORM_TEXTAREA: 'form-textarea',
     BUTTON: 'btn',
-    ADD_ITEM: 'add-item',
+    ADD_TEXTAREA_GROUP: 'add-item',
     LIST: 'list',
     LIST_ITEM: 'list-item',
   },

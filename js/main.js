@@ -19,23 +19,15 @@ function setStateApp(state = '', id = '', outputNode = document.getElementById(C
 function createForm(id, outputNode) {
   outputNode.innerHTML = '';
   if (id) {
-    const data = DATA[id];
-    const formNode = document.createElement('form');
-    formNode.dataset.index = id;
-    formNode.className = CONSTANTS.CLASS_NAMES.FORM;
-    formNode.name = CONSTANTS.MAIN_FORM;
-    formNode.onsubmit = e => { e.preventDefault(); }
-    const inputNode = document.createElement('input');
-    inputNode.type = 'text';
-    inputNode.name = `title`;
-    inputNode.required = true;
-    inputNode.className = CONSTANTS.CLASS_NAMES.FORM_TITLE;
-    inputNode.value = data.h;
-    formNode.append(inputNode);
-    getFormItem(data.c, formNode);
-    const formAddItemNode = getAddItemNode();
-    formAddItemNode.onclick = function () {
-      getFormItem([['', '']], formNode);
+    const config = { data: DATA, id: id };
+    const formNode = getNode('form', config);
+    formNode.append(getNode('input', config));
+    formNode.append(...getNodes('textarea-group', config));
+
+    const addTextareaGroup = document.createElement('div');
+    addTextareaGroup.className = CONSTANTS.CLASS_NAMES.ADD_TEXTAREA_GROUP;
+    addTextareaGroup.onclick = function () {
+      formNode.append(...getNodes('textarea-group', { data: [{ c: [['', '']] }], id: 0 }));
     }
     const buttonNode = document.createElement('button');
     buttonNode.className = CONSTANTS.CLASS_NAMES.BUTTON;
@@ -43,30 +35,73 @@ function createForm(id, outputNode) {
     buttonNode.onclick = function (e) {
       addWordsToDATA.call(this);
     }
-    formNode.append(formAddItemNode, buttonNode);
+    formNode.append(addTextareaGroup, buttonNode);
     outputNode.append(formNode);
   }
 }
 
-function getFormItem(data, outputNode) {
-  data.forEach((element, index) => {
-    const formItemNode = document.createElement('div');
-    formItemNode.className = CONSTANTS.CLASS_NAMES.FORM_ITEM;
-    Object.keys(element).forEach(key => {
-      let textareaNode = document.createElement('textarea');
-      textareaNode.className = CONSTANTS.CLASS_NAMES.FORM_TEXTAREA;
-      textareaNode.placeholder = !+key ? CONSTANTS.NATIVE : CONSTANTS.LEARN;
-      textareaNode.value = element[key];
-      textareaNode.required = true;
-      formItemNode.append(textareaNode);
-    });
-    const removeFormItem = document.createElement('i');
-    removeFormItem.onclick = function () {
-      this.closest(`.${CONSTANTS.CLASS_NAMES.FORM_ITEM}`).remove();
-    }
-    formItemNode.append(removeFormItem);
-    outputNode.append(formItemNode);
-  });
+function getNode(value, config) {
+  let node = '';
+  switch (value) {
+    case 'form':
+      node = document.createElement('form');
+      node.dataset.index = config.id;
+      node.className = CONSTANTS.CLASS_NAMES.FORM;
+      node.name = CONSTANTS.MAIN_FORM;
+      node.onsubmit = e => { e.preventDefault(); }
+      break;
+
+    case 'input':
+      node = document.createElement('input');
+      node.type = 'text';
+      node.name = `title`;
+      node.required = true;
+      node.className = CONSTANTS.CLASS_NAMES.FORM_TITLE;
+      node.value = config.data[config.id].h;
+      break;
+
+    case 'textarea':
+      node = document.createElement('textarea');
+      node.className = CONSTANTS.CLASS_NAMES.FORM_TEXTAREA;
+      node.placeholder = config.props.placeholder;
+      node.value = config.props.value;
+      node.required = true;
+      break;
+
+    default:
+      node = document.createElement('div');
+      break;
+  }
+  return node;
+}
+
+function getNodes(value, config) {
+  let nodes = [];
+  switch (value) {
+    case 'textarea-group':
+      config.data[config.id].c.forEach((element, index) => {
+        const textareaGroup = document.createElement('div');
+        textareaGroup.className = CONSTANTS.CLASS_NAMES.TEXTAREA_GROUP;
+        Object.keys(element).forEach(key => {
+          config.props = {};
+          config.props.placeholder = !+key ? CONSTANTS.NATIVE : CONSTANTS.LEARN;
+          config.props.value = element[key];
+          textareaGroup.append(getNode('textarea', config));
+        });
+        const removeFormItem = document.createElement('i');
+        removeFormItem.onclick = function () {
+          this.closest(`.${CONSTANTS.CLASS_NAMES.TEXTAREA_GROUP}`).remove();
+        }
+        textareaGroup.append(removeFormItem);
+        nodes.push(textareaGroup);
+      });
+      break;
+
+    default:
+      nodes = document.createElement('div');
+      break;
+  }
+  return nodes;
 }
 
 function addWordsToDATA() {
@@ -91,12 +126,6 @@ function addWordsToDATA() {
   }
 }
 
-function getAddItemNode() {
-  const formAddItemNode = document.createElement('div');
-  formAddItemNode.className = CONSTANTS.CLASS_NAMES.ADD_ITEM;
-  return formAddItemNode;
-}
-
 function createList(outputNode) {
   outputNode.innerHTML = '';
   const listNode = document.createElement('div');
@@ -106,11 +135,12 @@ function createList(outputNode) {
   })
   const listItemNode = document.createElement('div');
   listItemNode.className = CONSTANTS.CLASS_NAMES.LIST_ITEM;
-  const formAddItemNode = getAddItemNode();
-  formAddItemNode.onclick = function (e) {
+  const formNewList = document.createElement('div');
+  formNewList.className = CONSTANTS.CLASS_NAMES.ADD_TEXTAREA_GROUP;
+  formNewList.onclick = function (e) {
     setStateApp(CONSTANTS.EDIT);
   }
-  listItemNode.append(formAddItemNode);
+  listItemNode.append(formNewList);
   listNode.append(listItemNode);
   outputNode.append(listNode);
 }
