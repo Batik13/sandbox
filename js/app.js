@@ -1,3 +1,4 @@
+const merge = (t, s) => { const o = Object, a = o.assign; for (const k of o.keys(s)) s[k] instanceof o && a(s[k], merge(t[k], s[k])); return a(t || {}, s), t }
 const loadScript = (src, async = true, type = 'text/javascript') => {
   return new Promise((resolve, reject) => {
     try {
@@ -24,8 +25,12 @@ const loadScript = (src, async = true, type = 'text/javascript') => {
 
 loadScript('js/static.js')
   .then(data => {
-    loadScript('js/main.js')
-      .then(data => { })
+    loadScript('js/Template.js')
+      .then(data => {
+        loadScript('js/main.js')
+          .then(data => { })
+          .catch(err => { console.error(err) })
+      })
       .catch(err => { console.error(err) })
   })
   .catch(err => { console.error(err) })

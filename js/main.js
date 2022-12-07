@@ -1,4 +1,4 @@
-const DATA = JSON.parse(localStorage.getItem('data')) || [];
+let DATA = JSON.parse(localStorage.getItem('data')) || [];
 
 setStateApp();
 
@@ -18,94 +18,27 @@ function setStateApp(state = '', id = '', outputNode = document.getElementById(C
 
 function createForm(id, outputNode) {
   outputNode.innerHTML = '';
-  if (id) {
-    const config = { data: DATA, id: id };
-    const formNode = getNode('form', config);
-    formNode.append(getNode('input', config));
-    formNode.append(...getNodes('textarea-group', config));
-
-    const addTextareaGroup = document.createElement('div');
-    addTextareaGroup.className = CONSTANTS.CLASS_NAMES.ADD_TEXTAREA_GROUP;
-    addTextareaGroup.onclick = function () {
-      formNode.append(...getNodes('textarea-group', { data: [{ c: [['', '']] }], id: 0 }));
-    }
-    const buttonNode = document.createElement('button');
-    buttonNode.className = CONSTANTS.CLASS_NAMES.BUTTON;
-    buttonNode.innerHTML = CONSTANTS.DONE;
-    buttonNode.onclick = function (e) {
-      addWordsToDATA.call(this);
-    }
-    formNode.append(addTextareaGroup, buttonNode);
-    outputNode.append(formNode);
+  const emptyArr = new Array(2).fill('');
+  !DATA[id] && DATA.push({ h: CONSTANTS.LIST_HEADING_PLACEHOLDER, c: [emptyArr] });
+  const tmp = new Template({ data: DATA, id: id });
+  const formNode = tmp.get('form')[0];
+  formNode.append(...tmp.get('input'));
+  formNode.append(...tmp.get('form-row'));
+  const addRow = document.createElement('div');
+  addRow.className = CONSTANTS.CLASS_NAMES.ADD_TEXTAREA_GROUP;
+  addRow.onclick = function () {
+    formNode.append(...tmp.get('form-row', { data: [{ c: [emptyArr] }], id: 0 }));
   }
-}
-
-function getNode(value, config) {
-  let node = '';
-  switch (value) {
-    case 'form':
-      node = document.createElement('form');
-      node.dataset.index = config.id;
-      node.className = CONSTANTS.CLASS_NAMES.FORM;
-      node.name = CONSTANTS.MAIN_FORM;
-      node.onsubmit = e => { e.preventDefault(); }
-      break;
-
-    case 'input':
-      node = document.createElement('input');
-      node.type = 'text';
-      node.name = `title`;
-      node.required = true;
-      node.className = CONSTANTS.CLASS_NAMES.FORM_TITLE;
-      node.value = config.data[config.id].h;
-      break;
-
-    case 'textarea':
-      node = document.createElement('textarea');
-      node.className = CONSTANTS.CLASS_NAMES.FORM_TEXTAREA;
-      node.placeholder = config.props.placeholder;
-      node.value = config.props.value;
-      node.required = true;
-      break;
-
-    default:
-      node = document.createElement('div');
-      break;
+  const buttonNode = tmp.get('button')[0];
+  buttonNode.onclick = function (e) {
+    addWordsToDATA.call(this);
   }
-  return node;
-}
-
-function getNodes(value, config) {
-  let nodes = [];
-  switch (value) {
-    case 'textarea-group':
-      config.data[config.id].c.forEach((element, index) => {
-        const textareaGroup = document.createElement('div');
-        textareaGroup.className = CONSTANTS.CLASS_NAMES.TEXTAREA_GROUP;
-        Object.keys(element).forEach(key => {
-          config.props = {};
-          config.props.placeholder = !+key ? CONSTANTS.NATIVE : CONSTANTS.LEARN;
-          config.props.value = element[key];
-          textareaGroup.append(getNode('textarea', config));
-        });
-        const removeFormItem = document.createElement('i');
-        removeFormItem.onclick = function () {
-          this.closest(`.${CONSTANTS.CLASS_NAMES.TEXTAREA_GROUP}`).remove();
-        }
-        textareaGroup.append(removeFormItem);
-        nodes.push(textareaGroup);
-      });
-      break;
-
-    default:
-      nodes = document.createElement('div');
-      break;
-  }
-  return nodes;
+  formNode.append(addRow, buttonNode);
+  outputNode.append(formNode);
 }
 
 function addWordsToDATA() {
-  const listNumber = this.closest(`.${CONSTANTS.CLASS_NAMES.FORM}`).dataset.index;
+  const listNumber = this.closest(`.${CONSTANTS.CLASS_NAMES.FORM}`).id;
   const formTitle = Array.from(document.querySelectorAll(`.${CONSTANTS.CLASS_NAMES.FORM_TITLE}`));
   const textareaList = Array.from(document.querySelectorAll(`.${CONSTANTS.CLASS_NAMES.FORM} textarea`));
   const isEmptyField = [...formTitle, ...textareaList].find(el => !el.value);
@@ -138,7 +71,7 @@ function createList(outputNode) {
   const formNewList = document.createElement('div');
   formNewList.className = CONSTANTS.CLASS_NAMES.ADD_TEXTAREA_GROUP;
   formNewList.onclick = function (e) {
-    setStateApp(CONSTANTS.EDIT);
+    setStateApp(CONSTANTS.EDIT, DATA.length);
   }
   listItemNode.append(formNewList);
   listNode.append(listItemNode);
