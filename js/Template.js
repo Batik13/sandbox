@@ -7,6 +7,17 @@ class Template {
     const isPropsEmpty = Object.keys(props).length === 0 && props.constructor === Object;
     let nodes = [];
     switch (value) {
+      case 'delete-list':
+        if (isPropsEmpty) {
+          props = {
+            title: CONSTANTS.FORM_DELETE_TITLE,
+            className: CONSTANTS.CLASS_NAMES.FORM_DELETE,
+            innerHTML: '&#128465;',
+          }
+        }
+        nodes.push(merge(document.createElement('a'), props));
+        break;
+
       case 'form':
         if (isPropsEmpty) {
           props = {

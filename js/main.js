@@ -22,6 +22,17 @@ function createForm(id, outputNode) {
   !DATA[id] && DATA.push({ h: CONSTANTS.LIST_HEADING_PLACEHOLDER, c: [emptyArr] });
   const tmp = new Template({ data: DATA, id: id });
   const formNode = tmp.get('form')[0];
+  const deleteListNode = tmp.get('delete-list')[0];
+  deleteListNode.onclick = () => {
+    confirm(CONSTANTS.CONFIRM_TEXT) && (() => {
+      DATA = DATA.filter((element, index) => {
+        return index !== +id;
+      });
+      localStorage.setItem('data', JSON.stringify(DATA));
+      setStateApp();
+    })()
+  }
+  formNode.append(deleteListNode);
   formNode.append(...tmp.get('input'));
   formNode.append(...tmp.get('form-row'));
   const addRow = document.createElement('div');

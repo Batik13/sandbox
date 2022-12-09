@@ -7,8 +7,11 @@ const CONSTANTS = {
   DONE: 'Done',
   MAIN_FORM: 'mainForm',
   LIST_HEADING_PLACEHOLDER: 'List heading',
+  CONFIRM_TEXT: 'Are you sure you want to delete this list?',
+  FORM_DELETE_TITLE: 'Delete list',
   CLASS_NAMES: {
     FORM: 'form',
+    FORM_DELETE: 'form-delete',
     FORM_TITLE: 'form-title',
     TEXTAREA_GROUP: 'form-item',
     FORM_TEXTAREA: 'form-textarea',

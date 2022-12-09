@@ -86,6 +86,24 @@ body {
   align-items: center;
   margin: auto;
   padding: 34px;
+  padding-bottom: 130px;
+  position: relative;
+}
+
+.form-delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 55px;
+  color: #ec9595;
+  width: 66px;
+  text-align: center;
+  cursor: pointer;
+  padding-bottom: 6px;
+}
+
+.form-delete:hover {
+  color: #ff6d6d;
 }
 
 .form-title {
