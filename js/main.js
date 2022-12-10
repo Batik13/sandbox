@@ -94,6 +94,9 @@ function createListItem(outputNode, data) {
   listItemNode.className = CONSTANTS.CLASS_NAMES.LIST_ITEM;
   listItemNode.innerHTML = data.heading;
   listItemNode.dataset.id = data.id;
+  listItemNode.onclick = function() {
+    console.log(this);
+  };
   const editNode = document.createElement('i');
   editNode.innerHTML = CONSTANTS.EDIT;
   editNode.onclick = function (e) {
