@@ -8,7 +8,8 @@ function setStateApp(state = '', id = '', outputNode = document.getElementById(C
       createForm(id, outputNode);
       break;
     case CONSTANTS.TRAIN:
-
+      const train = new Train({ data: DATA, id: id });
+      train.start()
       break;
     default:
       createList(outputNode);
@@ -94,8 +95,8 @@ function createListItem(outputNode, data) {
   listItemNode.className = CONSTANTS.CLASS_NAMES.LIST_ITEM;
   listItemNode.innerHTML = data.heading;
   listItemNode.dataset.id = data.id;
-  listItemNode.onclick = function() {
-    console.log(this);
+  listItemNode.onclick = function () {
+    setStateApp(CONSTANTS.TRAIN, this.dataset.id);
   };
   const editNode = document.createElement('i');
   editNode.innerHTML = CONSTANTS.EDIT;
@@ -103,6 +104,7 @@ function createListItem(outputNode, data) {
     const parentNode = this.closest('div');
     const id = parentNode.dataset.id;
     setStateApp(CONSTANTS.EDIT, id);
+    e.stopPropagation();
   }
   listItemNode.append(editNode);
   outputNode.append(listItemNode);

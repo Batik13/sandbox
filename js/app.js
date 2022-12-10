@@ -27,9 +27,12 @@ loadScript('js/static.js')
   .then(data => {
     loadScript('js/Template.js')
       .then(data => {
-        loadScript('js/main.js')
-          .then(data => { })
-          .catch(err => { console.error(err) })
+        loadScript('js/Train.js')
+          .then(data => {
+            loadScript('js/main.js')
+              .then(data => { })
+              .catch(err => { console.error(err) })
+          })
       })
       .catch(err => { console.error(err) })
   })
