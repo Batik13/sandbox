@@ -1,4 +1,5 @@
-import testMe from './test.js';
-import './style.css';
+import './styles/index.scss';
+import { Test } from './scripts/test.js';
 
-testMe();
+const test = new Test('Hello Bat!');
+test.log();

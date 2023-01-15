@@ -1,0 +1,31 @@
+html {
+  font-family: generalFont;
+}
+
+body {
+}
+
+h1 {
+  color: $black;
+  
+  @include mq(md) {
+    color:green;
+  }
+}
+
+.technologies {
+  background: url("../assets/images/webpack.jpg") no-repeat;
+  padding-left: 210px;
+  display: flex;
+  align-items: center;
+
+  & img {
+    width: 250px;
+  }
+
+  & span {
+    margin: 0 20px;
+    font-size: 55px;
+    color: #5e5e5e;
+  }
+}

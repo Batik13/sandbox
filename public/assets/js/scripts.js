@@ -1,0 +1,1 @@
+(()=>{"use strict";new class{constructor(o){this.name=o}log(){console.log(this.name)}}("Hello Bat!").log()})();
