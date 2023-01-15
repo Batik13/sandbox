@@ -1,5 +1,5 @@
 import './styles/index.scss';
-import { Test } from './scripts/test.js';
+import { App } from './scripts/App.js';
 
-const test = new Test('Hello Bat!');
-test.log();
+const app = new App('Create App');
+app.init();
