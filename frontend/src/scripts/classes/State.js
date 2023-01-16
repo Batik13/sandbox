@@ -1,11 +1,10 @@
 import { Page } from './Page';
 
 export class State {
-
   static stateList = ['home', 'list', 'form', 'train'];
 
-  init() {
-    this.set('home');
+  constructor(observe) {
+    this.set(observe.getHash());
   }
 
   set(state) {
