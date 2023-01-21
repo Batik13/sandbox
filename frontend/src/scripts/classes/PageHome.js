@@ -1,5 +1,5 @@
 export class PageHome {
   constructor() {
-    console.log('home');
+    console.log('home333');
   }
 }

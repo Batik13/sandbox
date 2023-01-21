@@ -1,5 +1,4 @@
 import { State } from './classes/State';
-import { Observe } from './classes/Observe';
 
 export class App {
   constructor() {
@@ -7,7 +6,9 @@ export class App {
   }
 
   init() {
-    const observe = new Observe();
-    new State(observe);
+    const state = new State();
+    onhashchange = (event) => {
+      state.update();
+    };
   }
 }

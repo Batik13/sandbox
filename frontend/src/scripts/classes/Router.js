@@ -1,11 +1,9 @@
 export class Router {
-  constructor() {
-
+  static route(hashName) {
+    window.location.href = `${window.location.origin}/#${hashName}`;
   }
 
-  init() {
-    console.log(window.location);
-
-    // State.set();
+  static getHash() {
+    return window.location.hash.substring(1);
   }
 }
