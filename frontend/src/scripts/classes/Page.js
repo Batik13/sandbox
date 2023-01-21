@@ -1,9 +1,12 @@
+import config from './../config';
+
 import { State } from './State';
 import { CustomException } from './CustomException';
 import { PageHome } from './PageHome';
 import { PageList } from './PageList';
 import { PageForm } from './PageForm';
 import { PageTrain } from './PageTrain';
+import { Template } from './Template';
 
 export class Page {
   constructor(name) {
@@ -20,17 +23,19 @@ export class Page {
   }
 
   create() {
+    const template = new Template(document.getElementById(config.appNodeId));
+
     if (this.name === 'home') {
-      new PageHome();
+      template.create(new PageHome());
     }
     if (this.name === 'list') {
-      new PageList();
+      template.create(new PageList());
     }
     if (this.name === 'form') {
-      new PageForm();
+      template.create(new PageForm());
     }
     if (this.name === 'train') {
-      new PageTrain();
+      template.create(new PageTrain());
     }
   }
 }
