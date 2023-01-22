@@ -10,14 +10,8 @@ export class TemplatePage {
 
   init() {
     const layoutRoot = document.createElement('div');
-    layoutRoot.classList = `container ${Router.getHash()}`;
-
-    const layoutWrap = document.createElement('div');
-    layoutWrap.classList = `container__wrap`;
-
-    layoutRoot.append(layoutWrap);
-    layoutWrap.append(this.create());
-
+    layoutRoot.classList = `container-fluid ${Router.getHash()}`;
+    layoutRoot.append(this.create());
     this.template = layoutRoot;
   }
 
