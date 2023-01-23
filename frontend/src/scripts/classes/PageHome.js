@@ -29,7 +29,20 @@ export class PageHome extends TemplatePage {
 
       const card = document.createElement('div');
       card.classList = 'card-item';
-      card.innerHTML = element.name;
+
+      const name = document.createElement('span');
+      name.classList = 'card-item__name';
+      name.innerHTML = element.name;
+      card.append(name);
+
+      ['train', 'edit'].forEach(element => {
+        const link = document.createElement('a');
+        link.classList = `card-item__link card-item__link--${element}`;
+        link.href = `#${element}`;
+        link.innerHTML = element;
+        card.append(link);
+      })
+
 
       col.append(card);
       row.append(col);

@@ -3,8 +3,7 @@ import config from './../config';
 import { State } from './State';
 import { CustomException } from './CustomException';
 import { PageHome } from './PageHome';
-import { PageList } from './PageList';
-import { PageForm } from './PageForm';
+import { PageEdit } from './PageEdit';
 import { PageTrain } from './PageTrain';
 import { Template } from './Template';
 
@@ -28,11 +27,8 @@ export class Page {
     if (this.name === 'home') {
       template.create(new PageHome());
     }
-    if (this.name === 'list') {
-      template.create(new PageList());
-    }
-    if (this.name === 'form') {
-      template.create(new PageForm());
+    if (this.name === 'edit') {
+      template.create(new PageEdit());
     }
     if (this.name === 'train') {
       template.create(new PageTrain());

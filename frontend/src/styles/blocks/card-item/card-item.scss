@@ -1,5 +1,55 @@
 .card-item {
-  min-height: 70px;
+  $block: &;
+  height: 70px;
   background-color: rgb(175, 175, 175);
   margin: 10px 0;
+  position: relative;
+
+  &:hover {
+    #{$block}__name {
+      filter: blur(2px);
+    }
+
+    #{$block}__link {
+      opacity: 0.8;
+    }
+  }
+
+  &__name {
+    font-size: 33px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    opacity: 0;
+    position: absolute;
+    width: 50%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    transition: all .3s;
+
+    &:hover {
+      color: #000;
+    }
+
+    &--train {
+      left: 0;
+      background: #673ab7;
+    }
+
+    &--edit {
+      right: 0;
+      background: #2196f3;
+    }
+  }
 }

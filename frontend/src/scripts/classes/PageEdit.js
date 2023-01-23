@@ -1,9 +1,9 @@
 import { TemplatePage } from "./TemplatePage";
 
-export class PageList extends TemplatePage {
+export class PageEdit extends TemplatePage {
   create() {
     const tmp = document.createElement('div');
-    tmp.innerHTML = 'List';
+    tmp.innerHTML = 'Edit';
 
     return tmp;
   }
