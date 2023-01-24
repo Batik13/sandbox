@@ -43,11 +43,26 @@ export class PageHome extends TemplatePage {
         card.append(link);
       })
 
-
       col.append(card);
       row.append(col);
-    })
+    });
+
+    row.append(this.createButton());
 
     return row;
+  }
+
+  createButton() {
+    const col = document.createElement('div');
+    col.classList = 'col-3 d-flex align-items-center';
+
+    const button = document.createElement('a');
+    button.href = `#add`;
+    button.classList = 'button button--plus';
+    button.innerHTML = '+';
+
+    col.append(button);
+
+    return col;
   }
 }
