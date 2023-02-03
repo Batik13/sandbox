@@ -2,7 +2,7 @@ import { Page } from './Page';
 import { Router } from './Router';
 
 export class State {
-  static stateList = ['home', 'list', 'edit', 'train'];
+  static stateList = ['home', 'add', 'edit', 'train'];
 
   constructor() {
     this.update();

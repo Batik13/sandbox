@@ -6,6 +6,7 @@ import { PageHome } from './PageHome';
 import { PageEdit } from './PageEdit';
 import { PageTrain } from './PageTrain';
 import { Template } from './Template';
+import { PageAdd } from './PageAdd';
 
 export class Page {
   constructor(name) {
@@ -29,6 +30,9 @@ export class Page {
     }
     if (this.name === 'edit') {
       template.create(new PageEdit());
+    }
+    if (this.name === 'add') {
+      template.create(new PageAdd());
     }
     if (this.name === 'train') {
       template.create(new PageTrain());
