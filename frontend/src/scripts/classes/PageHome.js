@@ -26,7 +26,7 @@ export class PageHome extends TemplatePage {
 
     data.forEach(element => {
       const colLayout = this.getCol({ classList: 'col-3' });
-      const card = this.getCardWrap();
+      const card = this.getCard();
       const cardName = this.getCardName(element);
       const cardLinks = this.getCardLinks();
 
@@ -45,7 +45,7 @@ export class PageHome extends TemplatePage {
     return col;
   }
 
-  getCardWrap() {
+  getCard() {
     const card = document.createElement('div');
     card.classList = 'card-item';
     return card;
