@@ -4,28 +4,25 @@ export class PageEdit extends TemplatePage {
   create() {
     const tmp = document.createElement('div');
     tmp.innerHTML = `
-    <form class="row g-3 needs-validation" novalidate>
+    <form class="form row g-3 needs-validation" novalidate>
       <div class="col-12">
-        <label for="categoryName" class="form-label">Category name</label>
-        <input type="text" class="form-control" id="categoryName" placeholder="Words from the article" required>
-        <div class="valid-feedback">
-          Looks good!
+        <input type="text" class="form-control form-control-lg" placeholder="Category name" required>
+      </div>
+      <div class="col-12">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input type="text" class="form-control form-control-lg" placeholder="Ru" required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control form-control-lg" placeholder="Eng" required>
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <label for="nativeWord" class="form-label">RU</label>
-        <input type="text" class="form-control" id="nativeWord" placeholder="Язык">
-      </div>
-      <div class="col-md-6">
-        <label for="learnWord" class="form-label">EN</label>
-        <input type="text" class="form-control" id="learnWord" placeholder="Language">
+      <div class="col-12">
+        <a href="#add" class="button button--plus button--sm" title="Add new part"></a>
       </div>
       <div class="col-12">
-        <label for="inputAddress2" class="form-label">Добавить новую пару</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-      </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <button type="submit" class="btn btn-primary btn-lg">Done</button>
       </div>
     </form>
     `;

@@ -76,7 +76,6 @@ export class PageHome extends TemplatePage {
     const button = document.createElement('a');
     button.href = `#add`;
     button.classList = 'button button--plus';
-    button.innerHTML = '+';
 
     return button;
   }

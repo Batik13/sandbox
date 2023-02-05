@@ -6,17 +6,34 @@
   cursor: pointer;
 
   &--plus {
+    display: inline-block;
+    position: relative;
     height: 70px;
-    font-size: 6em;
-    line-height: .5;
     margin: 10px 0;
-    color: white;
-    text-align: center;
     background: repeating-linear-gradient(45deg, #606dbc, #606dbc 40px, #465298 40px, #465298 80px);
 
     &:hover {
       color: white;
       background: repeating-linear-gradient(45deg, #465298, #465298 40px, #606dbc 40px, #606dbc 80px);
+    }
+
+    &::after {
+      content: "+";
+      color: #fff;
+      font-size: 4em;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-57%);
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  &--sm {
+    height: 48px;
+
+    &::after {
+      font-size: 3em;
     }
   }
 }
