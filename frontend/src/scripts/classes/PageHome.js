@@ -24,9 +24,9 @@ export class PageHome extends TemplatePage {
     const data = store.getList();
     const cols = [];
 
-    data.forEach(element => {
+    data.forEach((element, id) => {
       const colLayout = this.getCol({ classList: 'col-sm-12 col-md-4' });
-      const card = this.getCard();
+      const card = this.getCard(id);
       const cardName = this.getCardName(element);
       const cardLinks = this.getCardLinks();
 
@@ -45,9 +45,10 @@ export class PageHome extends TemplatePage {
     return col;
   }
 
-  getCard() {
+  getCard(id) {
     const card = document.createElement('div');
     card.classList = 'card-item';
+    card.dataset.id = id;
     return card;
   }
 
@@ -65,9 +66,12 @@ export class PageHome extends TemplatePage {
       link.classList = `card-item__link card-item__link--${element}`;
       link.href = `#${element}`;
       link.innerHTML = element;
-
       links.push(link);
     });
+
+    links[1].onclick = function () {
+      PageHome.setCategoryIdInStore(this.closest('.card-item').dataset.id);
+    };
 
     return links;
   }
@@ -78,5 +82,9 @@ export class PageHome extends TemplatePage {
     button.classList = 'button button--plus';
 
     return button;
+  }
+
+  static setCategoryIdInStore(categoryId) {
+    localStorage.setItem('categoryId', categoryId);
   }
 }
