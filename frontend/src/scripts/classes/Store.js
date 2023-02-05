@@ -1,23 +1,11 @@
 export class Store {
-  constructor() { }
+  category = [];
+
+  constructor() {
+    this.category = localStorage.getItem('category');
+  }
 
   getList() {
-    return [
-      {
-        name: "Colors",
-        content: [
-          ["Красный", "Red"],
-          ["Зеленый", "Green"],
-          ["Желтый", "Yellow"],
-        ]
-      },
-      {
-        name: "Sizes",
-        content: [
-          ["Длинный", "Long"],
-          ["Маленький", "Small"],
-        ]
-      },
-    ];
+    return JSON.parse(this.category);
   }
 }
