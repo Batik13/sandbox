@@ -8,8 +8,8 @@ export class PageEdit extends TemplatePage {
       <div class="col-12">
         <input type="text" class="form-control form-control-lg" placeholder="Category name" required>
       </div>
-      <div class="col-12">
-        <div class="row g-3">
+      <div class="col-12" data-container>
+        <div class="row g-3 pb-3">
           <div class="col-md-6">
             <input type="text" class="form-control form-control-lg" placeholder="Ru" required>
           </div>
@@ -18,7 +18,7 @@ export class PageEdit extends TemplatePage {
           </div>
         </div>
       </div>
-      <div class="col-12">
+      <div class="col-12 mt-0">
         <a href="#add" class="button button--plus button--sm" title="Add new part"></a>
       </div>
       <div class="col-12">
