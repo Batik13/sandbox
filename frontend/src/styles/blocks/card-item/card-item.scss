@@ -12,8 +12,10 @@
 
     #{$block}__link {
       opacity: 0.8;
+      visibility: visible;
     }
   }
+
 
   &__name {
     font-size: 33px;
@@ -22,10 +24,14 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+    filter: blur(1px);
+
+    @include mq(md) {
+      filter: none;
+    }
   }
 
   &__link {
-    opacity: 0;
     position: absolute;
     width: 50%;
     top: 0;
@@ -36,7 +42,12 @@
     font-size: 24px;
     color: #fff;
     text-decoration: none;
-    transition: all .3s;
+    opacity: 0.8;
+
+    @include mq(md) {
+      opacity: 1;
+      visibility: hidden;
+    }
 
     &:hover {
       color: #000;

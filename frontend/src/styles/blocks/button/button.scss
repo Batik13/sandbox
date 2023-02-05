@@ -6,9 +6,10 @@
   cursor: pointer;
 
   &--plus {
-    max-height: 70px;
+    height: 70px;
     font-size: 6em;
-    line-height: .7;
+    line-height: .5;
+    margin: 10px 0;
     color: white;
     text-align: center;
     background: repeating-linear-gradient(45deg, #606dbc, #606dbc 40px, #465298 40px, #465298 80px);

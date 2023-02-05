@@ -5,7 +5,7 @@ export class PageHome extends TemplatePage {
   create() {
     const row = this.getRow();
     const cols = this.getCols();
-    const colButton = this.getCol({ classList: 'col-3 d-flex align-items-center' });
+    const colButton = this.getCol({ classList: 'col-sm-12 col-md-4 d-flex align-items-center' });
     const buttonAdd = this.getButtonAdd();
 
     colButton.append(buttonAdd);
@@ -25,7 +25,7 @@ export class PageHome extends TemplatePage {
     const cols = [];
 
     data.forEach(element => {
-      const colLayout = this.getCol({ classList: 'col-3' });
+      const colLayout = this.getCol({ classList: 'col-sm-12 col-md-4' });
       const card = this.getCard();
       const cardName = this.getCardName(element);
       const cardLinks = this.getCardLinks();
