@@ -39,12 +39,6 @@ export class PageHome extends TemplatePage {
     return cols;
   }
 
-  getCol(config) {
-    const col = document.createElement('div');
-    col.classList = config.classList;
-    return col;
-  }
-
   getCard(id) {
     const card = document.createElement('div');
     card.classList = 'card-item';

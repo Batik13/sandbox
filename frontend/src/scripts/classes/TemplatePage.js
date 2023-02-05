@@ -18,4 +18,10 @@ export class TemplatePage {
   create() {
     return document.createElement('div');
   }
+
+  getCol(config) {
+    const col = document.createElement('div');
+    col.classList = config.classList;
+    return col;
+  }
 }
