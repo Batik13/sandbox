@@ -24,13 +24,13 @@ export class PageEdit extends TemplatePage {
       <div class="col-12 mt-0">
         <a href="#add" class="button button--plus button--sm" title="Add new part"></a>
       </div>
-      <div class="col-12 d-flex justify-content-between">
-        <button type="button" class="btn btn-primary btn-lg disabled" disabled>Delete items</button>
-        <div>
-          <button type="button" class="btn btn-primary btn-lg">Delete category</button>
-          <button type="submit" class="btn btn-primary btn-lg ms-3">Save</button>
-          </div>
+      <div class="col-12 d-sm-flex justify-content-between">
+        <button type="button" class="btn btn-primary btn-lg mb-3" disabled>Delete items</button>
+        <div class="d-inline-block">
+          <button type="button" class="btn btn-primary btn-lg mb-3">Delete category</button>
+          <button type="submit" class="btn btn-primary btn-lg mb-3 ms-sm-3">Save</button>
         </div>
+      </div>
     </form>
     `;
 
