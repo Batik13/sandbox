@@ -1,0 +1,10 @@
+.expression-group {
+  $block: &;
+  position: relative;
+
+  &__delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
