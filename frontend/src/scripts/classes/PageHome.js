@@ -21,20 +21,22 @@ export class PageHome extends TemplatePage {
 
   getCols() {
     const store = new Store();
-    const data = store.getList();
+    const data = store.getCategoryList();
     const cols = [];
 
-    data.forEach((element, id) => {
-      const colLayout = this.getCol({ classList: 'col-sm-12 col-md-4' });
-      const card = this.getCard(id);
-      const cardName = this.getCardName(element);
-      const cardLinks = this.getCardLinks();
+    if (data) {
+      data.forEach((element, id) => {
+        const colLayout = this.getCol({ classList: 'col-sm-12 col-md-4' });
+        const card = this.getCard(id);
+        const cardName = this.getCardName(element);
+        const cardLinks = this.getCardLinks();
 
-      card.append(cardName, ...cardLinks);
-      colLayout.append(card);
+        card.append(cardName, ...cardLinks);
+        colLayout.append(card);
 
-      cols.push(colLayout);
-    });
+        cols.push(colLayout);
+      });
+    }
 
     return cols;
   }

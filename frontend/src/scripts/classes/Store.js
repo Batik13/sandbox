@@ -1,3 +1,5 @@
+import { Router } from './Router';
+
 export class Store {
   category = [];
 
@@ -5,7 +7,19 @@ export class Store {
     this.category = localStorage.getItem('category');
   }
 
-  getList() {
+  getCategoryList() {
     return JSON.parse(this.category);
+  }
+
+  getCategory(id) {
+    return this.getCategoryList()[id];
+  }
+
+  getCurrentCategory() {
+    const categoryId = localStorage.getItem('categoryId') || false;
+    if (!categoryId) {
+      Router.route('home');
+    }
+    return categoryId;
   }
 }
