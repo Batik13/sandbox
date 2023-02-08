@@ -4,8 +4,8 @@ import { Store } from "./Store";
 export class PageHome extends TemplatePage {
   create() {
     const row = this.getRow();
-    const cols = this.getCols();
-    const colButton = this.getCol({ classList: 'col-sm-12 col-md-4 d-flex align-items-center' });
+    const cols = this.getDivs();
+    const colButton = this.getDiv({ classList: 'col-sm-12 col-md-4 d-flex align-items-center' });
     const buttonAdd = this.getButtonAdd();
 
     colButton.append(buttonAdd);
@@ -19,14 +19,14 @@ export class PageHome extends TemplatePage {
     return row;
   }
 
-  getCols() {
+  getDivs() {
     const store = new Store();
     const data = store.getCategoryList();
     const cols = [];
 
     if (data) {
       data.forEach((element, id) => {
-        const colLayout = this.getCol({ classList: 'col-sm-12 col-md-4' });
+        const colLayout = this.getDiv({ classList: 'col-sm-12 col-md-4' });
         const card = this.getCard(id);
         const cardName = this.getCardName(element);
         const cardLinks = this.getCardLinks();
