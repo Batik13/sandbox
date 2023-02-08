@@ -1,16 +1,18 @@
 import { TemplatePage } from "./TemplatePage";
 
 export class PageAdd extends TemplatePage {
+  form = '';
+
   create() {
-    const form = this.getForm();
+    this.form = this.getForm();
     const categoryName = this.getCategoryName();
     const expressionGroup = this.getExpressionGroup();
     const dynamicAdditionElement = this.getDynamicAdditionElement();
     const buttons = this.getButtons();
 
-    form.append(categoryName, expressionGroup, dynamicAdditionElement, buttons);
+    this.form.append(categoryName, expressionGroup, dynamicAdditionElement, buttons);
 
-    return form;
+    return this.form;
   }
 
   getForm() {
@@ -96,9 +98,17 @@ export class PageAdd extends TemplatePage {
       innerText: 'Delete category',
     });
     const buttonSave = this.getButton({
-      type: 'submit',
+      type: 'button',
       classList: 'btn btn-primary btn-lg mb-3 ms-sm-3',
       innerText: 'Save',
+      onclick: () => {
+        let event = new Event("hello", { bubbles: true });
+        this.form.dispatchEvent(event);
+
+        if (this.form.checkValidity()) {
+          console.log('form Validity');
+        }
+      }
     });
     buttonGroup.append(buttonDeleteCategory, buttonSave);
 

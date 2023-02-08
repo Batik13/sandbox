@@ -49,6 +49,7 @@ export class TemplatePage {
     config?.type && (element.type = config.type) || (element.type = 'button');
     config?.disabled && (element.disabled = config.disabled);
     config?.innerText && (element.innerText = config.innerText) || (element.innerText = 'Button');
+    config?.onclick && (element.onclick = config.onclick);
     return element;
   }
 }
