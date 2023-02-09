@@ -1,7 +1,8 @@
 import { Router } from "./Router";
 
-export class TemplatePage {
+export class PageTemplate {
   template = '';
+  form = '';
 
   constructor() {
     this.init();
@@ -40,6 +41,7 @@ export class TemplatePage {
     config?.classList && (element.classList = config.classList);
     config?.href && (element.href = config.href);
     config?.title && (element.title = config.title);
+    config?.onclick && (element.onclick = config.onclick);
     return element;
   }
 

@@ -1,7 +1,9 @@
-import { TemplatePage } from "./TemplatePage";
+import config from './../config';
+
+import { PageTemplate } from "./PageTemplate";
 import { Store } from "./Store";
 
-export class PageHome extends TemplatePage {
+export class PageHome extends PageTemplate {
   create() {
     const row = this.getRow();
     const cols = this.getDivs();
@@ -73,11 +75,28 @@ export class PageHome extends TemplatePage {
   }
 
   getButtonAdd() {
-    const button = document.createElement('a');
-    button.href = `#add`;
-    button.classList = 'button button--plus';
+    const observer = new MutationObserver(function (mutations) {
+      for (let mutation of mutations) {
+        if (mutation.type === 'childList') {
+          if(mutation.addedNodes.length !== 0) {
+            console.log(mutations);
+          }
+        }
+      }
+    });
 
-    return button;
+    const app = document.getElementById(config.appNodeId);
+
+    const link = this.getLink({
+      href: '#add',
+      classList: 'button button--plus',
+      title: 'Add new category',
+      onclick: () => {
+        observer.observe(app, { childList: true });
+      }
+    });
+
+    return link;
   }
 
   static setCategoryIdInStore(categoryId) {

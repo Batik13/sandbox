@@ -1,7 +1,6 @@
-import { TemplatePage } from "./TemplatePage";
+import { PageTemplate } from "./PageTemplate";
 
-export class PageAdd extends TemplatePage {
-  form = '';
+export class PageAdd extends PageTemplate {
 
   create() {
     this.form = this.getForm();
@@ -11,7 +10,6 @@ export class PageAdd extends TemplatePage {
     const buttons = this.getButtons();
 
     this.form.append(categoryName, expressionGroup, dynamicAdditionElement, buttons);
-
     return this.form;
   }
 

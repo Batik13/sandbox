@@ -1,6 +1,6 @@
-import { TemplatePage } from "./TemplatePage";
+import { PageTemplate } from "./PageTemplate";
 
-export class PageTrain extends TemplatePage {
+export class PageTrain extends PageTemplate {
   create() {
     const tmp = document.createElement('div');
     tmp.innerHTML = 'Train';

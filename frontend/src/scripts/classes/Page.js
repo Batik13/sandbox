@@ -1,11 +1,9 @@
-import config from './../config';
-
 import { State } from './State';
 import { CustomException } from './CustomException';
 import { PageHome } from './PageHome';
 import { PageEdit } from './PageEdit';
 import { PageTrain } from './PageTrain';
-import { Template } from './Template';
+import { PageBuilder } from './PageBuilder';
 import { PageAdd } from './PageAdd';
 
 export class Page {
@@ -23,19 +21,19 @@ export class Page {
   }
 
   create() {
-    const template = new Template(document.getElementById(config.appNodeId));
+    const pageBuilder = new PageBuilder();
 
     if (this.name === 'home') {
-      template.create(new PageHome());
+      pageBuilder.create(new PageHome());
     }
     if (this.name === 'edit') {
-      template.create(new PageEdit());
+      pageBuilder.create(new PageEdit());
     }
     if (this.name === 'add') {
-      template.create(new PageAdd());
+      pageBuilder.create(new PageAdd());
     }
     if (this.name === 'train') {
-      template.create(new PageTrain());
+      pageBuilder.create(new PageTrain());
     }
   }
 }
