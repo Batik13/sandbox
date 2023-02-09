@@ -1,4 +1,4 @@
-document.addEventListener("hello", function (event) {
+document.addEventListener("activateFormValidation", function (event) {
   (function () {
     'use strict'
     var forms = document.querySelectorAll('.needs-validation')

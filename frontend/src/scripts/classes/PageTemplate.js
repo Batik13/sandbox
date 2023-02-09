@@ -1,6 +1,8 @@
+import config from './../config';
 import { Router } from "./Router";
 
 export class PageTemplate {
+  app = document.getElementById(config.appNodeId);
   template = '';
   form = '';
 

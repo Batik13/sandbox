@@ -100,7 +100,7 @@ export class PageAdd extends PageTemplate {
       classList: 'btn btn-primary btn-lg mb-3 ms-sm-3',
       innerText: 'Save',
       onclick: () => {
-        let event = new Event("hello", { bubbles: true });
+        let event = new Event("activateFormValidation", { bubbles: true });
         this.form.dispatchEvent(event);
 
         if (this.form.checkValidity()) {

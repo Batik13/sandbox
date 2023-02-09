@@ -1,7 +1,6 @@
-import config from './../config';
-
 import { PageTemplate } from "./PageTemplate";
 import { Store } from "./Store";
+import { Watcher } from "./Watcher";
 
 export class PageHome extends PageTemplate {
   create() {
@@ -75,24 +74,16 @@ export class PageHome extends PageTemplate {
   }
 
   getButtonAdd() {
-    const observer = new MutationObserver(function (mutations) {
-      for (let mutation of mutations) {
-        if (mutation.type === 'childList') {
-          if(mutation.addedNodes.length !== 0) {
-            console.log(mutations);
-          }
-        }
-      }
-    });
-
-    const app = document.getElementById(config.appNodeId);
-
     const link = this.getLink({
       href: '#add',
       classList: 'button button--plus',
       title: 'Add new category',
       onclick: () => {
-        observer.observe(app, { childList: true });
+        Watcher.updatePage(actions => {
+          if (actions.add) {
+            console.log('added page');
+          }
+        })
       }
     });
 
