@@ -89,6 +89,9 @@ export class PageAdd extends PageTemplate {
       classList: 'btn btn-primary btn-lg mb-3',
       disabled: true,
       innerText: 'Delete items',
+      onclick: () => {
+        console.log('added dynamic fields in data-expression-group');
+      }
     });
     const buttonGroup = this.getDiv({ classList: 'd-inline-block' });
     const buttonDeleteCategory = this.getButton({
