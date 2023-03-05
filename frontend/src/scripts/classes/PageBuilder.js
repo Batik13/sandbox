@@ -1,4 +1,4 @@
-import config from './../config';
+import config from "./../config";
 
 export class PageBuilder {
   constructor(appNode = document.getElementById(config.appNodeId)) {
@@ -6,7 +6,7 @@ export class PageBuilder {
   }
 
   create(nodeList) {
-    this.appNode.innerHTML = '';
+    this.appNode.innerHTML = "";
     this.appNode.append(nodeList);
   }
 }

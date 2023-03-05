@@ -1,10 +1,10 @@
-import { Router } from './Router';
+import { Router } from "./Router";
 
 export class Store {
   category = [];
 
   constructor() {
-    this.category = localStorage.getItem('category');
+    this.category = localStorage.getItem("category");
   }
 
   getCategoryList() {
@@ -16,9 +16,9 @@ export class Store {
   }
 
   getCurrentCategory() {
-    const categoryId = localStorage.getItem('categoryId') || false;
+    const categoryId = localStorage.getItem("categoryId") || false;
     if (!categoryId) {
-      Router.route('home');
+      Router.route("home");
     }
     return categoryId;
   }

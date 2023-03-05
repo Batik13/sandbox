@@ -1,7 +1,6 @@
 import { PageTemplate } from "./PageTemplate";
 
 export class PageAdd extends PageTemplate {
-
   create() {
     this.form = this.getForm();
     const categoryName = this.getCategoryName();
@@ -9,19 +8,24 @@ export class PageAdd extends PageTemplate {
     const dynamicAdditionElement = this.getDynamicAdditionElement();
     const buttons = this.getButtons();
 
-    this.form.append(categoryName, expressionGroup, dynamicAdditionElement, buttons);
+    this.form.append(
+      categoryName,
+      expressionGroup,
+      dynamicAdditionElement,
+      buttons
+    );
     return this.form;
   }
 
   getForm() {
-    const node = document.createElement('form');
-    node.classList = 'form row g-3 needs-validation';
+    const node = document.createElement("form");
+    node.classList = "form row g-3 needs-validation";
     node.noValidate = true;
     return node;
   }
 
   getCategoryName() {
-    const node = this.getDiv({ classList: 'col-12' });
+    const node = this.getDiv({ classList: "col-12" });
     node.innerHTML = `<input type="text" class="form-control form-control-lg" placeholder="Category name" required>`;
     return node;
   }
@@ -34,9 +38,9 @@ export class PageAdd extends PageTemplate {
   }
 
   getExpressionGroupWrap() {
-    const node = document.createElement('div');
-    node.classList = 'col-12';
-    node.dataset.expressionGroup = true;
+    const node = document.createElement("div");
+    node.classList = "col-12";
+    node.id = "expression-group-wrap";
     return node;
   }
 
@@ -44,76 +48,98 @@ export class PageAdd extends PageTemplate {
     return this.getExpressionGroupItem();
   }
 
-  getExpressionGroupItem(data = '') {
-    const node = document.createElement('div');
-    node.classList = 'expression-group row g-3 pb-3';
-    const expressionGroupItemDelete = this.getDiv({ classList: 'col-1 expression-group__delete' });
-    const expressionGroupItemColNative = this.getDiv({ classList: 'col' });
-    const expressionGroupItemColLearn = this.getDiv({ classList: 'col' });
+  getExpressionGroupItem(data = "") {
+    const node = this.getDiv({ classList: "expression-group row g-3 pb-3" });
+    const expressionGroupItemDelete = this.getDiv({
+      classList: "col-1 expression-group__delete",
+    });
+    const expressionGroupItemColNative = this.getDiv({ classList: "col" });
+    const expressionGroupItemColLearn = this.getDiv({ classList: "col" });
 
-    expressionGroupItemDelete.append(this.getInput({
-      classList: 'form-check-input',
-      type: 'checkbox',
-    }));
-    expressionGroupItemColNative.append(this.getInput({
-      classList: 'form-control form-control-lg',
-      type: 'text',
-      placeholder: 'Ru',
-      required: true
-    }));
-    expressionGroupItemColLearn.append(this.getInput({
-      classList: 'form-control form-control-lg',
-      type: 'text',
-      placeholder: 'En',
-      required: true
-    }));
-    node.append(expressionGroupItemDelete, expressionGroupItemColNative, expressionGroupItemColLearn);
+    expressionGroupItemDelete.append(
+      this.getInput({
+        classList: "form-check-input",
+        type: "checkbox",
+      })
+    );
+    expressionGroupItemColNative.append(
+      this.getInput({
+        classList: "form-control form-control-lg",
+        type: "text",
+        placeholder: "Ru",
+        required: true,
+      })
+    );
+    expressionGroupItemColLearn.append(
+      this.getInput({
+        classList: "form-control form-control-lg",
+        type: "text",
+        placeholder: "En",
+        required: true,
+      })
+    );
+    node.append(
+      expressionGroupItemDelete,
+      expressionGroupItemColNative,
+      expressionGroupItemColLearn
+    );
 
     return node;
   }
 
   getDynamicAdditionElement() {
-    const node = this.getDiv({ classList: 'col-12 mt-0' });
+    const node = this.getDiv({ classList: "col-12 mt-0" });
     const link = this.getLink({
-      href: '#add',
-      classList: 'button button--plus button--sm',
-      title: 'Add new part',
+      href: "#add",
+      classList: "button button--plus button--sm",
+      title: "Add new part",
+      onclick: () => {
+        this.addFields();
+      },
     });
     node.append(link);
     return node;
   }
 
   getButtons() {
-    const node = this.getDiv({ classList: 'col-12 d-sm-flex justify-content-between' });
-    const buttonDeleteItems = this.getButton({
-      classList: 'btn btn-primary btn-lg mb-3',
-      disabled: true,
-      innerText: 'Delete items',
-      onclick: () => {
-        console.log('added dynamic fields in data-expression-group');
-      }
+    const node = this.getDiv({
+      classList: "col-12 d-sm-flex justify-content-between",
     });
-    const buttonGroup = this.getDiv({ classList: 'd-inline-block' });
+    const buttonDeleteItems = this.getButton({
+      classList: "btn btn-primary btn-lg mb-3",
+      disabled: true,
+      innerText: "Delete items",
+      onclick: () => {
+        console.log("Delete items");
+      },
+    });
+    const buttonGroup = this.getDiv({ classList: "d-inline-block" });
     const buttonDeleteCategory = this.getButton({
-      classList: 'btn btn-primary btn-lg mb-3',
-      innerText: 'Delete category',
+      classList: "btn btn-primary btn-lg mb-3",
+      innerText: "Delete category",
     });
     const buttonSave = this.getButton({
-      type: 'button',
-      classList: 'btn btn-primary btn-lg mb-3 ms-sm-3',
-      innerText: 'Save',
+      type: "button",
+      classList: "btn btn-primary btn-lg mb-3 ms-sm-3",
+      innerText: "Save",
       onclick: () => {
         let event = new Event("activateFormValidation", { bubbles: true });
         this.form.dispatchEvent(event);
 
         if (this.form.checkValidity()) {
-          console.log('form Validity');
+          console.log("form Validity");
         }
-      }
+      },
     });
     buttonGroup.append(buttonDeleteCategory, buttonSave);
 
     node.append(buttonDeleteItems, buttonGroup);
     return node;
+  }
+
+  addFields() {
+    const node = document.getElementById("expression-group-wrap");
+    const fields = this.getExpressionGroupItem();
+    node.append(fields);
   }
 }

@@ -1,4 +1,4 @@
-import { State } from './classes/State';
+import { State } from "./classes/State";
 
 export class App {
   constructor() {

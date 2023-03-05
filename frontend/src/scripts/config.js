@@ -1,3 +1,3 @@
 export default {
-  appNodeId: 'app'
-}
+  appNodeId: "app",
+};

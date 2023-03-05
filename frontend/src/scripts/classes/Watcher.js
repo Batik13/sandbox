@@ -1,13 +1,13 @@
-import config from './../config';
+import config from "./../config";
 
 export class Watcher {
   static updatePage(callback) {
     const observer = new MutationObserver(function (mutations) {
       for (let mutation of mutations) {
-        if (mutation.type === 'childList') {
-          if(mutation.addedNodes.length !== 0) {
+        if (mutation.type === "childList") {
+          if (mutation.addedNodes.length !== 0) {
             const actions = {
-              add: true
+              add: true,
             };
             callback(actions);
           }

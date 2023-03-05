@@ -1,10 +1,10 @@
-import config from './../config';
+import config from "./../config";
 import { Router } from "./Router";
 
 export class PageTemplate {
   app = document.getElementById(config.appNodeId);
-  template = '';
-  form = '';
+  template = "";
+  form = "";
 
   constructor() {
     this.init();
@@ -12,24 +12,24 @@ export class PageTemplate {
   }
 
   init() {
-    const layoutRoot = document.createElement('div');
+    const layoutRoot = document.createElement("div");
     layoutRoot.classList = `page__container container-fluid ${Router.getHash()}`;
     layoutRoot.append(this.create());
     this.template = layoutRoot;
   }
 
   create() {
-    return document.createElement('div');
+    return document.createElement("div");
   }
 
   getDiv(config) {
-    const element = document.createElement('div');
+    const element = document.createElement("div");
     config?.classList && (element.classList = config.classList);
     return element;
   }
 
   getInput(config) {
-    const element = document.createElement('input');
+    const element = document.createElement("input");
     config?.classList && (element.classList = config.classList);
     config?.type && (element.type = config.type);
     config?.value && (element.value = config.value);
@@ -39,7 +39,7 @@ export class PageTemplate {
   }
 
   getLink(config) {
-    const element = document.createElement('a');
+    const element = document.createElement("a");
     config?.classList && (element.classList = config.classList);
     config?.href && (element.href = config.href);
     config?.title && (element.title = config.title);
@@ -48,11 +48,12 @@ export class PageTemplate {
   }
 
   getButton(config) {
-    const element = document.createElement('button');
+    const element = document.createElement("button");
     config?.classList && (element.classList = config.classList);
-    config?.type && (element.type = config.type) || (element.type = 'button');
+    (config?.type && (element.type = config.type)) || (element.type = "button");
     config?.disabled && (element.disabled = config.disabled);
-    config?.innerText && (element.innerText = config.innerText) || (element.innerText = 'Button');
+    (config?.innerText && (element.innerText = config.innerText)) ||
+      (element.innerText = "Button");
     config?.onclick && (element.onclick = config.onclick);
     return element;
   }

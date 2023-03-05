@@ -1,8 +1,8 @@
-import { Page } from './Page';
-import { Router } from './Router';
+import { Page } from "./Page";
+import { Router } from "./Router";
 
 export class State {
-  static stateList = ['home', 'add', 'edit', 'train'];
+  static stateList = ["home", "add", "edit", "train"];
 
   constructor() {
     this.update();
@@ -11,9 +11,9 @@ export class State {
   update() {
     const hash = Router.getHash();
     if (hash) {
-      this.set(hash)
+      this.set(hash);
     } else {
-      Router.route('home')
+      Router.route("home");
     }
   }
 

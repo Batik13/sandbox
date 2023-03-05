@@ -6,7 +6,9 @@ export class PageHome extends PageTemplate {
   create() {
     const row = this.getRow();
     const cols = this.getDivs();
-    const colButton = this.getDiv({ classList: 'col-sm-12 col-md-4 d-flex align-items-center' });
+    const colButton = this.getDiv({
+      classList: "col-sm-12 col-md-4 d-flex align-items-center",
+    });
     const buttonAdd = this.getButtonAdd();
 
     colButton.append(buttonAdd);
@@ -15,8 +17,8 @@ export class PageHome extends PageTemplate {
   }
 
   getRow() {
-    const row = document.createElement('div');
-    row.classList = 'row justify-content-center';
+    const row = document.createElement("div");
+    row.classList = "row justify-content-center";
     return row;
   }
 
@@ -27,7 +29,7 @@ export class PageHome extends PageTemplate {
 
     if (data) {
       data.forEach((element, id) => {
-        const colLayout = this.getDiv({ classList: 'col-sm-12 col-md-4' });
+        const colLayout = this.getDiv({ classList: "col-sm-12 col-md-4" });
         const card = this.getCard(id);
         const cardName = this.getCardName(element);
         const cardLinks = this.getCardLinks();
@@ -43,23 +45,23 @@ export class PageHome extends PageTemplate {
   }
 
   getCard(id) {
-    const card = document.createElement('div');
-    card.classList = 'card-item';
+    const card = document.createElement("div");
+    card.classList = "card-item";
     card.dataset.id = id;
     return card;
   }
 
   getCardName(obj) {
-    const cardName = document.createElement('span');
-    cardName.classList = 'card-item__name';
+    const cardName = document.createElement("span");
+    cardName.classList = "card-item__name";
     cardName.innerHTML = obj.name;
     return cardName;
   }
 
   getCardLinks() {
     const links = [];
-    ['train', 'edit'].forEach(element => {
-      const link = document.createElement('a');
+    ["train", "edit"].forEach((element) => {
+      const link = document.createElement("a");
       link.classList = `card-item__link card-item__link--${element}`;
       link.href = `#${element}`;
       link.innerHTML = element;
@@ -67,7 +69,7 @@ export class PageHome extends PageTemplate {
     });
 
     links[1].onclick = function () {
-      PageHome.setCategoryIdInStore(this.closest('.card-item').dataset.id);
+      PageHome.setCategoryIdInStore(this.closest(".card-item").dataset.id);
     };
 
     return links;
@@ -75,22 +77,22 @@ export class PageHome extends PageTemplate {
 
   getButtonAdd() {
     const link = this.getLink({
-      href: '#add',
-      classList: 'button button--plus',
-      title: 'Add new category',
+      href: "#add",
+      classList: "button button--plus",
+      title: "Add new category",
       onclick: () => {
-        Watcher.updatePage(actions => {
+        Watcher.updatePage((actions) => {
           if (actions.add) {
-            console.log('added page');
+            console.log("added page");
           }
-        })
-      }
+        });
+      },
     });
 
     return link;
   }
 
   static setCategoryIdInStore(categoryId) {
-    localStorage.setItem('categoryId', categoryId);
+    localStorage.setItem("categoryId", categoryId);
   }
 }

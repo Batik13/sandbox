@@ -1,10 +1,10 @@
-import { State } from './State';
-import { CustomException } from './CustomException';
-import { PageHome } from './PageHome';
-import { PageEdit } from './PageEdit';
-import { PageTrain } from './PageTrain';
-import { PageBuilder } from './PageBuilder';
-import { PageAdd } from './PageAdd';
+import { State } from "./State";
+import { CustomException } from "./CustomException";
+import { PageHome } from "./PageHome";
+import { PageEdit } from "./PageEdit";
+import { PageTrain } from "./PageTrain";
+import { PageBuilder } from "./PageBuilder";
+import { PageAdd } from "./PageAdd";
 
 export class Page {
   constructor(name) {
@@ -14,25 +14,25 @@ export class Page {
 
   init() {
     if (State.stateList.includes(this.name)) {
-      this.create(this.name)
+      this.create(this.name);
     } else {
       CustomException.message(`Can't find such application state`);
     }
   }
 
-  create() {
+  create(pageName) {
     const pageBuilder = new PageBuilder();
 
-    if (this.name === 'home') {
+    if (pageName === "home") {
       pageBuilder.create(new PageHome());
     }
-    if (this.name === 'edit') {
+    if (pageName === "edit") {
       pageBuilder.create(new PageEdit());
     }
-    if (this.name === 'add') {
+    if (pageName === "add") {
       pageBuilder.create(new PageAdd());
     }
-    if (this.name === 'train') {
+    if (pageName === "train") {
       pageBuilder.create(new PageTrain());
     }
   }
